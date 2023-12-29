@@ -157,7 +157,7 @@ int main(void) {
   }
   load_fn += "\t}; \n}\n\n";
   load_fn += "static std::vector<FontBank::NamedFont> fonts_to_load() {\n"
-             "\t{\n";
+             "\treturn {\n";
 
   for (auto &f : fonts) {
     std::string extension = get_file_extension(f);
@@ -168,7 +168,7 @@ int main(void) {
       std::string path_for_name = write_hex_dump(file_contents, f + ".h", file);
 
       load_fn += "\t\t{\"" + to_name(f) + "\", new rendering::Font(" +
-                 path_for_name + ", " + path_for_name + "_len), 32.0},\n";
+                 path_for_name + ", " + path_for_name + "_len, 32.0)},\n";
       std::cout << OKGREEN_COLOR << "OK\n" << ENDC_COLOR;
     }
   }
